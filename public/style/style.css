@@ -1,0 +1,90 @@
+header {
+	/*display: grid;*/
+}
+
+body {
+	background-color: orange;
+}
+
+footer {
+	font-size: small;
+	font-style: italic;
+}
+
+.error{
+	background-color: red;
+	color: white;
+    white-space: pre;
+}
+
+input:invalid {
+    border-color: red;
+}
+input,
+input:valid {
+    border-color: #ccc;
+}
+
+input.invalid {
+    border-color: #DD2C00;
+}
+
+.containerWebcam {
+    display: grid;
+    grid-template-columns: 600px 180px;
+    margin: auto;
+    justify-content: center;
+
+    /*border: dashed 3px red;*/
+}
+
+.webcamClass {
+    display: grid;
+
+    /*border: dashed 3px green;*/
+}
+
+.userImg {
+    display: grid;
+    overflow:scroll;
+    height: 50vh;
+    width: 115px;
+    /*border: dashed 3px green;*/
+    justify-content: center;
+    align-content: start;
+    border: solid 1px black;
+}
+
+.userImg > div {
+    margin: auto;
+    /*margin-top: 0px;*/
+    /*padding-top: 0px;*/
+
+    /*border: solid 1px black;*/
+}
+
+.canvas {
+    display: none;
+}
+
+.delThumb {
+    padding: 2px;
+    font-size: 8pt;
+    height: 31px;
+    width: 92px;
+    background-color: red;
+    text-align: center;
+    /*border: dashed 3px blue;*/
+}
+
+.outputClass {
+    height:360px;
+    width:480px;
+    display:none;
+}
+
+.videoClass {
+    height:360px;
+    width:480px;
+    display:none;
+}

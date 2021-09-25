@@ -1,0 +1,47 @@
+		<form method='post' action='index.php?control=account&action=login' id='idForm'>
+
+			<label for='fmail'>E-Mail :</label><br>
+			<input type='email'
+				name='email'
+				placeholder='Email'
+				pattern='[^@]+@.+\..+'
+				title='Email format : modele@mail.net'
+				id='idEmail'
+				required><br>
+
+			<label for='fpassword'>Mot de passe :</label><br>
+			<input type='password'
+				name='password'
+				placeholder='Mot de passe'
+				required><br>
+
+			<button type='submit'>Valider</button></br></br>
+		</form>
+		<div><a href='index.php?page=forgetpassword'>Mot de passe oublié</a><br></div>
+
+		<script type='text/javascript'>
+			var input = document.getElementById('idEmail');
+			var form = document.getElementById('idForm');
+			var elem = document.createElement('div');
+			
+		    elem.id = 'idNotify';
+		    elem.style.display = 'none';
+		    form.appendChild(elem);
+
+		    input.addEventListener('invalid', function(event){
+			    event.preventDefault();
+			    if (!event.target.validity.valid) {
+			        elem.textContent = 'Email format : modele@mail.net\n';
+			        elem.className = 'error';
+			        elem.style.display = 'inline-block';
+			    }
+			});
+
+			input.addEventListener('input', function(event){
+			    if ('inline-block' === elem.style.display) {
+			    	elem.textContent = '';
+			        input.className = '';
+			        elem.style.display = 'none';
+			    }
+			});
+		</script>

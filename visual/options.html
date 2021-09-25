@@ -1,0 +1,117 @@
+		<form method='post' action='index.php?control=account&action=modif_account' id='idForm'>
+
+			<label for='fpseudo'>Changer le pseudonyme :</label><br>
+			<input type='text'
+				name='newpseudo'
+				placeholder='Nouveau pseudonyme'><br>
+
+			<label for='fmail'>Changer l'email :</label><br>
+			<input type='email'
+				name='newemail'
+				placeholder='Nouvel email'
+				pattern='[^@]+@.+\..+'
+				id='idEmail'
+				title='Email format : modele@mail.net'><br>
+
+			<label for='fpassword'>Nouveau mot de passe :</label><br>
+			<input type='password'
+				name='newpassword'
+				id='newpassword'
+				placeholder='Mot de passe'><br>
+
+			<label for='fconfirmpassword'>Confirmer le nouveau mot de passe :</label><br>
+			<input type='password'
+				name='confirmnewpassword'
+				id='confirmnewpassword'
+				placeholder='Confirmation'><br>
+
+			<label for='fconfirmpassword'>Mot de passe actuel :</label><br>
+			<input type='password'
+				name='actualpassword'
+				placeholder='Mot de passe actuel'
+				required><br>
+
+			<button type='submit'>Valider</button></br></br>
+		</form>
+
+		<script type='text/javascript'>
+
+			var mailElem = document.getElementById('idEmail');
+			var form = document.getElementById('idForm');
+			var errorElem = document.createElement('div');
+			var passElem = document.getElementById('newpassword');
+			var confirmPassElem = document.getElementById('confirmnewpassword');
+
+			regMail = '[^@]+@.+\..+',
+			regPass = '^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[^a-zA-Z0-9\s]).{8,}$',
+
+			emailErr = 'Format Email : x@x.x\n',
+			passwordErr = 'Le mot de passe doit faire au moins 8 caractères dont une lettre minuscule, majuscule, un chiffre et un caractère spécial.\n',
+			confirmPasswordErr = 'Les mots de passe ne sont pas identiques.\n';
+
+		    errorElem.id = 'idNotify';
+		    errorElem.style.display = 'none';
+		    form.appendChild(errorElem);
+
+		    function error_notif_on(errorElem, event, msg) {
+		    	event.preventDefault();
+			    if (!errorElem.textContent.includes(msg)) {
+			        errorElem.textContent += msg;
+			        errorElem.className = 'error';
+			        errorElem.style.display = 'inline-block';
+			    }
+		    }
+
+		    function error_notif_off(errorElem, input, msg) {
+		    	if ('inline-block' === errorElem.style.display) {
+			    	errorElem.textContent = errorElem.textContent.replace(msg, '');
+			    	if (errorElem.textContent === '') {
+			        	input.className = '';
+			        	errorElem.style.display = 'none';
+			    	}
+			    }
+		    }
+
+		    function check_confirm_pass(passElem, confirmPassElem, confirmPasswordErr, errorElem, event) {
+		    	if (passElem.value != confirmPassElem.value) {
+					confirmPassElem.setCustomValidity(confirmPasswordErr);
+			    	error_notif_on(errorElem, event, confirmPasswordErr);
+			    } else {
+					confirmPassElem.setCustomValidity('');
+			    	error_notif_off(errorElem, confirmPassElem, confirmPasswordErr);
+			    }
+		    }
+
+		    mailElem.addEventListener('focusout', function(event){
+		    	if (mailElem.value.match(regMail) === null && mailElem.value != '') {
+			    	error_notif_on(errorElem, event, emailErr);
+		    	}
+			});
+
+			mailElem.addEventListener('input', function(event){
+				if (mailElem.value.match(regMail) != null || mailElem.value == '') {
+					error_notif_off(errorElem, mailElem, emailErr);
+				}
+			});
+
+		    passElem.addEventListener('focusout', function(event){
+		    	if (passElem.value.match(regPass) === null  && passElem.value != '') {
+			    	error_notif_on(errorElem, event, passwordErr);
+			    }
+			});
+
+			passElem.addEventListener('input', function(event){
+				if (passElem.value.match(regPass) != null || passElem.value == '') {
+			    	error_notif_off(errorElem, passElem, passwordErr);
+			    } if (confirmPassElem.value != '') {
+					check_confirm_pass(passElem, confirmPassElem, confirmPasswordErr, errorElem, event);
+			    } else if (passElem.value == '') {
+			    	error_notif_off(errorElem, confirmPassElem, confirmPasswordErr);
+				}
+			});
+
+			confirmPassElem.addEventListener('input', function(event){
+				check_confirm_pass(passElem, confirmPassElem, confirmPasswordErr, errorElem, event);
+			})
+
+		</script>
