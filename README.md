@@ -1,7 +1,7 @@
 # Camagru
 
 Premier projet web de 42 à part ertière, il vise à créer un site viable, sécurisé et avec base de données.
-Je l’ai implémenté sur un serveur local à l’aide de Xampp, codé en PHP, librairie standard, et MySQL coté serveur. Conformément au sujet,  le coté client est en HTML, CSS et Javascript (limité aux API natives des navigateurs.
+Je l’ai implémenté sur un serveur local à l’aide de Xampp, codé en PHP, librairie standard, et MySQL coté serveur. Conformément au sujet,  le coté client est en HTML, CSS et Javascript (limité aux API natives des navigateurs).
 
 Sont implémentés :
 - Structuration MVC
